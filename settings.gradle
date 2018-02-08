@@ -1,0 +1,2 @@
+include ':zhbj', ':slidingmenu_library', ':slidingmenudemo'
+include ':viewpagerindicater_library'
