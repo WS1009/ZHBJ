@@ -20,10 +20,10 @@ public class MainActivity extends SlidingFragmentActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);// 去除标题
-        setContentView(R.layout.activity_main);// 配置主界面
+        setContentView(R.layout.fragment_main);// 配置主界面
 
         // 配置左侧菜单
-        setBehindContentView(R.layout.left_menu);
+        setBehindContentView(R.layout.fragment_left);
         // 设置菜单模式
         SlidingMenu slidingMenu = getSlidingMenu();
         slidingMenu.setMode(SlidingMenu.LEFT);
@@ -31,13 +31,14 @@ public class MainActivity extends SlidingFragmentActivity {
         slidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
         // 设置主界面显示宽度
         int width = getWindowManager().getDefaultDisplay().getWidth();
-        slidingMenu.setBehindOffset(width*3/5);
+        slidingMenu.setBehindOffset(width * 3 / 5);
 
         initFragment();
     }
 
     /**
      * 初始化Fragment
+     * 向  R.id.fl_left_menu  和  R.id.fl_main空容器中添加内容
      */
     private void initFragment() {
         FragmentManager fm = getSupportFragmentManager();
@@ -53,6 +54,7 @@ public class MainActivity extends SlidingFragmentActivity {
 
     /**
      * 获取侧边栏对象
+     *
      * @return
      */
     public LeftMenuFragment getLeftMenuFragment() {
@@ -64,6 +66,7 @@ public class MainActivity extends SlidingFragmentActivity {
 
     /**
      * 获取主页对象
+     *
      * @return
      */
     public ContentFragment getContentFragment() {
