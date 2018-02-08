@@ -1,0 +1,10 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fl_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff">
+    <!--动态的添加fragment一般使用FrameLayout作为空的容器，
+    用来作为fragment的容器，使用RelativeLayout也可以，
+    但是显得不专业有时候会出现一些bug-->
+</FrameLayout>
