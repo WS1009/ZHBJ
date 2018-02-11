@@ -4,12 +4,15 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
+import android.webkit.WebChromeClient;
+import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebSettings.TextSize;
 import android.webkit.WebView;
@@ -27,7 +30,6 @@ import com.wangshun.zhbj.R;
  * 新闻详情页面
  *
  * @author Kevin
- *
  */
 @SuppressWarnings("deprecation")
 public class NewsDetailActivity extends Activity implements OnClickListener {
@@ -93,14 +95,50 @@ public class NewsDetailActivity extends Activity implements OnClickListener {
             // mWebView.loadUrl("http://www.itcast.cn");
             mWebView.setWebViewClient(new WebViewClient() {
 
+                //开始加载网页
+                @Override
+                public void onPageStarted(WebView view, String url, Bitmap favicon) {
+                    super.onPageStarted(view, url, favicon);
+                }
+
                 // 监听网页加载结束的事件
                 @Override
                 public void onPageFinished(WebView view, String url) {
                     mProgress.setVisibility(View.GONE);
                 }
+
+                //所有的链接跳转都会调用此方法
+                @Override
+                public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                    //在跳转连接时强制在当前webview中加载
+                    view.loadUrl(url);
+                    return true;
+                }
             });
 
             mWebView.loadUrl(mUrl);
+
+            //跳转到上个页面
+            //mWebView.goBack();
+
+            //挑个下个页面
+            //mWebView.goForward();
+
+            mWebView.setWebChromeClient(new WebChromeClient(){
+                @Override
+                public void onProgressChanged(WebView view, int newProgress) {
+                    super.onProgressChanged(view, newProgress);
+                    //进度发生变化
+                    System.out.println("WebView加载进度："+newProgress);
+                }
+
+                @Override
+                public void onReceivedTitle(WebView view, String title) {
+                    super.onReceivedTitle(view, title);
+                    //网页的标题
+                    System.out.println("网页标题："+title);
+                }
+            });
         }
     }
 
@@ -127,8 +165,8 @@ public class NewsDetailActivity extends Activity implements OnClickListener {
      */
     private void showChangeSizeDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        String[] items = new String[] { "超大号字体", "大号字体", "正常字体", "小号字体",
-                "超小号字体" };
+        String[] items = new String[]{"超大号字体", "大号字体", "正常字体", "小号字体",
+                "超小号字体"};
 
         // 设置单选对话框
         builder.setSingleChoiceItems(items, mSelectedSizeIndex,
