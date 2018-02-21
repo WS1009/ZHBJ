@@ -19,6 +19,8 @@ public class CacheUtils {
 	 *            缓存内容是json数据
 	 */
 	public static void setCache(Context ctx, String key, String value) {
+		//也可以使用文件缓存，以MD5（URL）为文件名，以json为文件内容
+		//也可以使用数据库存储缓存
 		SharePreferenceUtils.putString(ctx, key, value);
 	}
 
@@ -29,6 +31,7 @@ public class CacheUtils {
 	 * @return
 	 */
 	public static String getCache(Context ctx, String key) {
+		//文件缓存：查找一个有没有一个叫做MD5（url）的文件，有的话说明有缓存
 		return SharePreferenceUtils.getString(ctx, key, null);
 	}
 
