@@ -27,7 +27,6 @@ import java.util.ArrayList;
  * 主页面Fragment
  *
  * @author Kevin
- *
  */
 public class ContentFragment extends BaseFragment {
 
@@ -69,23 +68,18 @@ public class ContentFragment extends BaseFragment {
                 switch (checkedId) {
                     case R.id.rb_home:
                         mViewPager.setCurrentItem(0, false);// 让ViewPager切换到第一个页面
-                        setSlidingMenuEnable(false);
                         break;
                     case R.id.rb_news:
                         mViewPager.setCurrentItem(1, false);
-                        setSlidingMenuEnable(true);
                         break;
                     case R.id.rb_service:
                         mViewPager.setCurrentItem(2, false);
-                        setSlidingMenuEnable(true);
                         break;
                     case R.id.rb_gov:
                         mViewPager.setCurrentItem(3, false);
-                        setSlidingMenuEnable(true);
                         break;
                     case R.id.rb_setting:
                         mViewPager.setCurrentItem(4, false);
-                        setSlidingMenuEnable(false);
                         break;
 
                     default:
@@ -100,6 +94,13 @@ public class ContentFragment extends BaseFragment {
             @Override
             public void onPageSelected(int position) {
                 mPagerList.get(position).initData();// 当该页面选中时,才开始初始化当前页面的数据
+
+                //第一个页面和最后的页面禁用侧边栏打开
+                if (position == 0 || position == mPagerList.size() - 1) {
+                    setSlidingMenuEnable(false);
+                } else {
+                    setSlidingMenuEnable(true);
+                }
             }
 
             @Override
@@ -145,7 +146,9 @@ public class ContentFragment extends BaseFragment {
             BasePager pager = mPagerList.get(position);
             View view = pager.mRootView;// 获取当前页面的布局对象
             container.addView(view);// 将布局对象添加到容器中
-            // pager.initData();// 初始化数据, 为了节省流量,不在这里调用初始化数据的方法, 只有当标签真正被选中时才调用
+            //viewpager默认提前加载下一个页面,为了节省流量,不在这里调用初始化数据的方法,
+            // 只有当标签真正被选中时才调用
+            // pager.initData();// 初始化数据
             return view;
         }
 
