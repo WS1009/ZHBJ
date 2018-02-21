@@ -30,9 +30,9 @@ import java.util.ArrayList;
 
 /**
  * 新闻中心
- * 
+ *
  * @author Kevin
- * 
+ *
  */
 public class NewsCenterPager extends BasePager {
 
@@ -57,6 +57,7 @@ public class NewsCenterPager extends BasePager {
 			processData(cache);
 		}
 
+		//继续调用服务器是为了更新内容
 		getDataFromNet();// 从网络获取数据
 	}
 
@@ -114,7 +115,7 @@ public class NewsCenterPager extends BasePager {
 
 	/**
 	 * 设置当前详情页面
-	 * 
+	 *
 	 * @param position
 	 */
 	public void setCurrentDetailPager(int position) {
