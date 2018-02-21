@@ -1,7 +1,5 @@
 package com.wangshun.zhbj.base.impl.menudetail;
 
-import java.util.ArrayList;
-
 import android.app.Activity;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -10,17 +8,18 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.wangshun.zhbj.activity.MainActivity;
-import com.wangshun.zhbj.R;
-import com.wangshun.zhbj.base.BaseMenuDetailPager;
-import com.wangshun.zhbj.domain.NewsBean.NewsMenuBean;
-import com.wangshun.zhbj.domain.NewsBean.NewsMenuTab;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.lidroid.xutils.view.annotation.event.OnClick;
 import com.viewpagerindicator.TabPageIndicator;
-import com.wangshun.zhbj.base.impl.menudetail.TabDetailPager;
+import com.wangshun.zhbj.R;
+import com.wangshun.zhbj.activity.MainActivity;
+import com.wangshun.zhbj.base.BaseMenuDetailPager;
+import com.wangshun.zhbj.domain.NewsBean.NewsMenuBean;
+import com.wangshun.zhbj.domain.NewsBean.NewsMenuTab;
+
+import java.util.ArrayList;
 
 /**
  * 侧边栏, 新闻详情页面
@@ -121,6 +120,8 @@ public class NewsMenuDetailPager extends BaseMenuDetailPager implements
 	public void nextTab(View view) {
 		mViewPager.setCurrentItem(mViewPager.getCurrentItem() + 1);
 	}
+
+
 
 	@Override
 	public void onPageScrollStateChanged(int arg0) {
