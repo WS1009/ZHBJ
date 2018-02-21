@@ -13,62 +13,62 @@ import java.io.FileOutputStream;
 
 /**
  * 本地缓存工具类
- * 
+ *
  * @author Kevin
- * 
  */
 public class LocalCacheUtils {
 
-	private static final String LOCAL_PATH = Environment
-			.getExternalStorageDirectory().getAbsolutePath() + "/zhbj_cache_48";
+    //创建本地缓存的路径
+    private static final String LOCAL_PATH = Environment
+            .getExternalStorageDirectory().getAbsolutePath() + "/zhbj_cache";
 
-	/**
-	 * 从本地读取图片
-	 * 
-	 * @param url
-	 * @return
-	 */
-	public Bitmap getBitmapFromLocal(String url) {
-		try {
-			String fileName = MD5Encoder.encode(url);
-			File file = new File(LOCAL_PATH, fileName);
+    /**
+     * 从本地读取图片
+     *
+     * @param url
+     * @return
+     */
+    public Bitmap getBitmapFromLocal(String url) {
+        try {
+            String fileName = MD5Encoder.encode(url);
+            File file = new File(LOCAL_PATH, fileName);
 
-			if (file.exists()) {
-				Bitmap bitmap = BitmapFactory.decodeStream(new FileInputStream(
-						file));
-				return bitmap;
-			} else {
-				return null;
-			}
+            if (file.exists()) {
+                Bitmap bitmap = BitmapFactory.decodeStream(new FileInputStream(file));
+                return bitmap;
+            } else {
+                return null;
+            }
 
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
-	/**
-	 * 向本地存图片
-	 * 
-	 * @param url
-	 * @param bitmap
-	 */
-	public void putBitmapToLocal(String url, Bitmap bitmap) {
-		try {
-			String fileName = MD5Encoder.encode(url);
-			File file = new File(LOCAL_PATH, fileName);
-			File parent = file.getParentFile();
+    /**
+     * 向本地存图片
+     *
+     * @param url
+     * @param bitmap
+     */
+    public void putBitmapToLocal(String url, Bitmap bitmap) {
+        try {
+            String fileName = MD5Encoder.encode(url);
+            File file = new File(LOCAL_PATH, fileName);
+            File parent = file.getParentFile();
 
-			// 创建父文件夹
-			if (!parent.exists()) {
-				parent.mkdirs();
-			}
+            // 创建父文件夹
+            if (!parent.exists()) {
+                parent.mkdirs();
+            }
 
-			bitmap.compress(CompressFormat.JPEG, 100,
-					new FileOutputStream(file));
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+            //将图片压缩到本地
+            bitmap.compress(CompressFormat.JPEG, 100,
+                    new FileOutputStream(file));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
 }
