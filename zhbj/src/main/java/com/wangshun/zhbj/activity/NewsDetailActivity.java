@@ -187,6 +187,7 @@ public class NewsDetailActivity extends Activity implements OnClickListener {
                 switch (mCurrentSizeIndex) {
                     case 0:
                         mWebView.getSettings().setTextSize(TextSize.LARGEST);// 设置WebView中字体的大小
+                        //mWebView.getSettings().setTextZoom(8);直接设置字体的大小API14之后可用
                         break;
                     case 1:
                         mWebView.getSettings().setTextSize(TextSize.LARGER);
